@@ -28,6 +28,116 @@
     
     \section{Shell Linux}
 
+    \begin{frame}{La Shell}
+        \begin{columns}[t, onlytextwidth]
+            \column{0.2\textwidth}
+                \centering
+                \includegraphics[height=2.5cm, keepaspectratio]{images/user.pdf}
+
+            \column{0.2\textwidth}
+                \centering
+                \includegraphics[height=2cm, keepaspectratio]{images/rightarrow.pdf}
+            
+            \column{0.2\textwidth}
+                \centering
+                \includegraphics[height=2.5cm,keepaspectratio]{images/terminal.pdf}
+
+            \column{0.2\textwidth}
+                \centering
+                \includegraphics[height=2cm, keepaspectratio]{images/rightarrow.pdf}
+
+            \column{0.2\textwidth}
+                \centering
+                \includegraphics[height=2.5cm, keepaspectratio]{images/linux.pdf}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Il filesystem}
+        \centering
+        \includegraphics[height=6cm, keepaspectratio]{images/unix-fs.pdf}
+    \end{frame}
+
+    \begin{frame}{I Path}
+        \centering
+        \includegraphics[height=2cm, keepaspectratio]{images/path.pdf}
+        \vspace{0.5cm}
+        \begin{block}{Path assoluto}
+            Il \textbf{percorso assoluto} di un file è il percorso
+            che va dalla radice del filesystem allo stesso.
+        \end{block}
+
+        \begin{block}{Path relativo}
+            Fissando logicamente una particolare directory (in genere quella corrente) è possibile identificare un file attraverso il
+            \textbf{percorso relativo} che va da tale directory ad esso.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{I Path}
+        \begin{alertblock}{Nota}
+            Il percorso assoluto di un file è il suo percorso relativo rispetto
+            alla root.
+        \end{alertblock}
+
+        \begin{exampleblock}{Esempio}
+            \textbf{Directory corrente}: \textit{/home/}
+
+            \textbf{Path assoluto}: \textit{/home/davide/file.txt}
+
+            \textbf{Path relativo}: \textit{davide/file.txt}
+        \end{exampleblock}
+
+        \begin{block}{Cartelle virtuali}
+            \begin{itemize}
+                \item la cartella \textit{.} indica la cartella stessa
+                \item la cartella \textit{..} indica la cartella genitore (utile per navigare il filesystem)
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Path: file di dispositivo}
+        In ambiente UNIX esistono dei file speciali chiamati file di dispositivo:
+        identificano una particolare periferica del sistema ed attraverso questo è possibile interagire con tale periferica. \\
+        \vspace{0.25cm}
+        \begin{columns}[t, onlytextwidth]
+            \column{0.5\textwidth}
+                \centering
+                \includegraphics[height=1.5cm, keepaspectratio]{images/char.pdf}
+                
+                \textbf{A caratteri}
+
+            \column{0.5\textwidth}
+                \centering
+                \includegraphics[height=1.5cm, keepaspectratio]{images/block.pdf}
+                
+                \textbf{A blocchi}
+        \end{columns}
+
+        \vspace{0.25cm}
+
+        \begin{exampleblock}{Esempi}
+            \begin{itemize}
+                \item \textit{/dev/sda,/dev/sdb}\dots
+                \item \textit{/dev/sda1,/dev/sda2}\dots
+                \item \textit{/dev/tty1,/dev/tty2}\dots
+            \end{itemize}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Mount: quando voglio più spazio}
+    \end{frame}
+
+    \begin{frame}{Hello shell}
+        \begin{block}{}
+            \$ echo "Hello shell" 
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Hello man}
+    \end{frame}
+
+    \begin{frame}{Navigare il filesystem: ls}
+    \end{frame}
+
     \section{BASH}
     
 \end{document}
