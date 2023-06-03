@@ -22,8 +22,40 @@
         \maketitle
     \end{frame}
 
-    \begin{frame}{> whoami}
-        
+    \begin{frame}{\$ whoami}
+        \centering
+        \begin{tikzpicture} 
+            \begin{scope}
+                \clip [rounded corners=1.25cm] (0,0) rectangle coordinate (centerpoint) (2.5,2.5cm); 
+                \node [inner sep=0pt] at (centerpoint) {\includegraphics[width=2.5cm, keepaspectratio]{images/dc.jpg}}; 
+            \end{scope}
+        \end{tikzpicture}
+
+        \textbf{Davide Carnemolla} \\ @Herbrant
+
+        \vspace{1cm}
+
+        \begin{columns}[t, onlytextwidth]
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm, keepaspectratio]{images/open-source.pdf}
+
+                \small Open Source Enthusiast
+               
+
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm, keepaspectratio]{images/exambox.pdf}
+
+                \small ExamBox's father
+            
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=1.5cm, keepaspectratio]{images/cannoli.png}
+
+                \small Ricotta lover
+    
+        \end{columns}        
     \end{frame}
     
     \section{Shell Linux}
@@ -142,7 +174,7 @@
         \end{itemize}
 
         \begin{block}{Parametri}
-            Tipicamente un comando può richiedere dei parametri
+            Tipicamente un comando richiede dei parametri
             
             \vspace{0.5cm}
 
@@ -437,6 +469,15 @@
         \end{alertblock}
     \end{frame}
 
+    \begin{frame}{}
+        \centering
+        \includegraphics[height=4cm, keepaspectratio]{images/bugs-bunny-communist.png}
+        
+        \vspace{0.5cm}
+        
+        \Large \texttt{chmod 777 file.txt}
+    \end{frame}
+
     \begin{frame}{Filesystem: chown}
         \centering
         \includegraphics[height=3cm, keepaspectratio]{images/bugs-bunny-capitalist.png}
@@ -478,12 +519,93 @@
     \end{frame}
 
     \begin{frame}{Filesystem: link}
+        \begin{block}{Soft link}
+
+        \end{block}
+
+        \begin{block}{Hard link}
+        \end{block}
     \end{frame}
 
     \begin{frame}{Filesystem: ln}
+        \begin{block}{ln}
+            Sintassi: \texttt{\textbf{ln [-s] target... [linkpathname]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-s}}: crea un link simbolico invece che uno fisico
+                \item \texttt{\textbf{target}}: file o directory a cui il link farà riferimento
+                \item \texttt{\textbf{linkpathname}}: pathname del link
+            \end{itemize}
+
+            Il comando \texttt{\textbf{ln}} consente di creare link tra i file e le directory presenti nel filesystem.
+        \end{block}
     \end{frame}
 
     \begin{frame}{Filesystem: find}
+        \centering
+        \includegraphics[height=3cm, keepaspectratio]{images/scooby.jpg}
+
+        \begin{block}{find}
+            Sintassi: \texttt{\textbf{find [pathname...] [expression]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{pathname}}: percorso in cui cercare ricorsivamente i file
+                \item \texttt{\textbf{expression}}: le regole di selezione del file:
+                \begin{itemize}
+                    \item \texttt{\textbf{optione}}: modifica il comportamento della ricerca
+                    \item \texttt{\textbf{condizione}}: condizioni da verificare
+                    \item \texttt{\textbf{azione}}: specifica cosa deve fare quando trova il file
+                \end{itemize}
+            \end{itemize}
+
+            Ricerca nei pathname i file che soddisfano le espressioni date
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Filesystem: find}
+        \begin{exampleblock}{Esempio di find}
+            \texttt{\$ find . - name `*.sh' - print \\}
+            \texttt{./script.sh \\
+            ./prova.sh \\
+            ./conta.sh \\
+            ./cartella/esercizio/eseguimi.sh}
+
+            \vspace{0.5cm}
+
+            \texttt{\$ find /home/davide -name `*.bak' -exec rm {} \;}
+            
+            \vspace{0.5cm}
+
+            \texttt{\$ find /etc/ -type d -print}
+            \texttt{
+                /etc \\
+                /etc/pacman.d \\
+                /etc/pacman.d/gnupg \\
+                /etc/pacman.d/gnupg/private-keys-v1.d \\
+                /etc/pacman.d/gnupg/openpgp-revocs.d \\
+                ...
+            }
+
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{echo}
+        \centering
+        \includegraphics[height=3cm, keepaspectratio]{images/george.png}
+
+        \begin{block}{echo}
+            Sintassi \texttt{\textbf{echo [-n] [-e] [stringa...]}}
+
+            \begin{itemize}
+                \item \textbf{-n}: non aggiunge l'endline al termine della stringa
+                \item \textbf{-e}: permette l'uso di alcuni caratteri speciali
+                \item \texttt{\textbf{stringa}}: stringa da visualizzare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{echo}} da in output una stringa passata come parametro.
+        \end{block}
+
+        
     \end{frame}
 
     \begin{frame}{Redirezione dell'I/O}
@@ -494,13 +616,40 @@
         \includegraphics[height=3cm, keepaspectratio]{images/garfield.jpg}
 
         \begin{block}{cat}
+            Sintassi: \texttt{\textbf{cat [pathname...]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{pathname}}: file da visualizzare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{cat}} permette di mandare allo standard output il contenuto di uno o più file.
         \end{block}
     \end{frame}
 
-    \begin{frame}{less \& more}
-    \end{frame}
+    \begin{frame}{more \& less}
+        \begin{block}{more}
+            Sintassi: \texttt{\textbf{more [pathname...]}}
 
-    \begin{frame}{echo}
+            \begin{itemize}
+                \item \texttt{\textbf{pathname}}: file da visualizzare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{more}} si comporta come \texttt{\textbf{cat}} con
+            l'eccezione che se l'output è più lungo di una videata di schermo, ad ogni pagina viene fatta una pausa.
+        \end{block}
+
+        \begin{block}{less}
+            Sintassi: \texttt{\textbf{less [pathname...]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{pathname}}: file da visualizzare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{less}} è una versione più evoluta di \texttt{\textbf{more}}: non solo permette di
+            fare pause ad ogni pagina, ma permette anche di andare su e giù
+            nell’output. Inoltre è possibile effettuare ricerche interattive
+            all’interno del file.
+        \end{block}
     \end{frame}
 
     \begin{frame}{grep}
@@ -510,6 +659,8 @@
     \end{frame}
 
     \begin{frame}{Pipeline}
+        \centering
+        \includegraphics[height=2.5cm,keepaspectratio]{images/futurama.png}
     \end{frame}
 
     \begin{frame}{wc}
