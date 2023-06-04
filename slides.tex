@@ -303,6 +303,19 @@
         \end{columns}
     \end{frame}
 
+    \begin{frame}{Warning}
+        \centering
+        \includegraphics[height=3cm, keepaspectratio]{images/warning.pdf}
+
+        \vspace{0.5cm}
+
+        \Large La sintassi dei comandi presentati è stata semplificata per facilitare la presentazione
+
+        \vspace{0.5cm}
+
+        \small Per maggiori informazioni consultare sempre il manuale (\texttt{\textbf{man}})
+    \end{frame}
+
     \begin{frame}{Filesystem: ls}
         \begin{block}{ls}
             Sintassi: \texttt{\textbf{ls [-l] [-a] [-R] [pathname\dots]}}
@@ -587,16 +600,28 @@
     \end{frame}
 
     \begin{frame}{Filesystem: link}
-        \begin{block}{Soft link}
+        I filesystem UNIX permettono di creare dei file ``puntatori'' ad oggetto del filesystem, questi sono detti \textbf{link}.
+        \begin{alertblock}{Soft link}
             \small
-        \end{block}
+            I \textbf{soft link} (o \textbf{link simbolici}) sono dei file
+            speciali che contengono al loro interno il pathname per raggiungere il \textbf{file target}.
 
-        \begin{block}{Hard link}
+            Chiaramente, se viene rimosso il file target, il soft link diventa inconsistente.
+        \end{alertblock}
+
+        \begin{alertblock}{Hard link}
             \small
-        \end{block}
+
+            Gli \textbf{hard link} (o \textbf{link fisici}) agiscono a livello del filesystem. In particolare,
+            quando creiamo un hard link creiamo un puntatore all'\textbf{inode} presente nel filesystem.
+
+            Tale operazione è quindi trasparente a livello applicativo.
+            
+            Non è possibile, per ovvi motivi, creare hard link in filesystem differenti.
+        \end{alertblock}
     \end{frame}
 
-    \begin{frame}{Filesystem: ln}
+    \begin{frame}{Filesystem: ln/readlink}
         \begin{block}{ln}
             \small
             Sintassi: \texttt{\textbf{ln [-s] target... [linkpathname]}}
@@ -608,6 +633,17 @@
             \end{itemize}
 
             Il comando \texttt{\textbf{ln}} consente di creare link tra i file e le directory presenti nel filesystem.
+        \end{block}
+
+        \begin{block}{readlink}
+            \small
+            Sintassi: \texttt{\textbf{readlink pathfile...}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{pathfile}}: il path del link simbolico da risolvere
+            \end{itemize}
+
+            Il comando \textbf{readlink} restituisce in output la risoluzione del link simbolico.
         \end{block}
     \end{frame}
 
