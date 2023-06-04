@@ -324,17 +324,25 @@
             \item \textbf{\{\}}: singola stringa tra quelle elencate
         \end{itemize}
         \begin{exampleblock}{Esempio}
+            \footnotesize
+
             \$ ls
 
             esempio2.txt esempio3.txt esempio.txt script.sh scheda.pdf
+
+            \vspace{0.25cm}
 
             \$ ls esempio*.txt
 
             esempio2.txt esempio3.txt esempio.txt
 
+            \vspace{0.25cm}
+
             \$ ls esempio?.txt
 
             esempio2.txt esempio3.txt esempio.txt
+
+            \vspace{0.25cm}
 
             \$ ls *.\{txt,pdf\}
 
@@ -563,7 +571,8 @@
     \end{frame}
 
     \begin{frame}{Filesystem: find}
-        \begin{exampleblock}{Esempio di find}
+        \small
+        \begin{exampleblock}{Esempio}
             \texttt{\$ find . - name `*.sh' - print \\}
             \texttt{./script.sh \\
             ./prova.sh \\
@@ -608,9 +617,6 @@
         
     \end{frame}
 
-    \begin{frame}{Redirezione dell'I/O}
-    \end{frame}
-
     \begin{frame}{cat}
         \centering
         \includegraphics[height=3cm, keepaspectratio]{images/garfield.jpg}
@@ -652,27 +658,261 @@
         \end{block}
     \end{frame}
 
+    \begin{frame}{Redirezione dell'I/O}
+        Ogni processo ha 3 flussi di dati:
+
+        \begin{itemize}
+            \item \textbf{standard input}: da cui prende il suo input; in genere corrisponde alla tastiera
+            \item \textbf{standard output}: a cui invia il suo output; in genere corrisponde al terminale video
+            \item \textbf{standard error}: a cui invia gli eventuali messaggi d'errore; anche qui si usa in genere il terminale
+        \end{itemize}
+
+        Attraverso l'invocazione da riga di comando è possibile
+        redirezionare talu flussi su altri file.
+
+        \begin{itemize}
+            \item \texttt{\textbf{>}}: redireziona l'output su un file
+            \item \texttt{\textbf{>>}}: redireziona l'output su un file in modalità \textbf{append}
+            \item \texttt{\textbf{<}}: prende l'input da un file
+            \item \texttt{\textbf{2>}}: redireziona lo standard error su un file
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Redirezione dell'I/O: esempi}
+        \small
+
+        \begin{exampleblock}{}
+            \texttt{\$ ls > output.txt}
+
+            \texttt{\$ cat output.txt}
+
+            \texttt{esempio2.txt esempio3.txt esempio.txt}
+
+            \vspace{0.25cm}
+
+            \texttt{\$ echo Ciao >> output.txt}
+
+            \texttt{\$ cat output.txt}
+
+            \texttt{esempio2.txt esempio3.txt esempio.txt \\ Ciao}
+
+            \vspace{0.25cm}
+            
+            \texttt{\$ cat < output.txt}
+
+            \texttt{esempio2.txt esempio3.txt esempio.txt \\ Ciao}
+
+            \texttt{\$ man comandochenonesiste}
+
+            \texttt{Non c'è il manuale per comandochenonesiste}
+
+            \vspace{0.25cm}
+
+            \texttt{\$ man comandochenonesiste 2> /dev/null}
+
+            \vspace{0.05cm}
+        \end{exampleblock}
+    \end{frame}
+
     \begin{frame}{grep}
+        \begin{block}{grep}
+            Sintassi \texttt{\textbf{grep [-i] [-l] [-v] [-w] [pattern] [filename]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-i}}: ignora le differenze tra maiuscole e minuscole
+                \item \texttt{\textbf{-l}}: fornisce la lista dei file che contengono il \texttt{\textbf{pattern}}
+                \item \texttt{\textbf{-v}}: stampa le linee che \textbf{non} contengono il \texttt{\textbf{pattern}}
+                \item \texttt{\textbf{-w}}: vengono restituite le linee che contengono il \texttt{\textbf{pattern}} come parola completa
+                \item \texttt{\textbf{pattern}}: espressione da ricercare
+                \item \texttt{\textbf{filename}}: file da analizzare
+            \end{itemize}
+
+            Cerca all’interno delle righe dei file specificato le righe che
+            contengono (o meno, a secondo delle opzioni) il pattern specificato. Il pattern
+            può essere una semplice stringa o una regular expression.
+        \end{block}
     \end{frame}
 
     \begin{frame}{Espressioni regolari}
+        Attraverso le \textbf{espressioni regolari} è possibile specificare dei
+        \textit{pattern} più complessi della semplice stringa contenuta.
+
+        \begin{center}
+            \begin{tabular}{ |c|c| } 
+                \hline
+                \textbf{metacarattere} & \textbf{significato} \\
+                \hline 
+                $\hat{}$ & \small inizio della linea \\ 
+                \hline
+                \$ & \small fine della linea \\
+                \hline 
+                . & \small un singolo carattere qualsiasi \\
+                \hline
+                \texttt{[str]} & \small un qualunque carattere in \texttt{str} \\
+                \hline
+                \texttt{[$\hat{}$str]} & \small un qualunque carattere \textbf{non} in \texttt{str} \\
+                \hline
+                \texttt{[a-z]} & \small un qualunque carattere tra a e z \\
+                \hline
+                \texttt{\textbackslash} & \small inibisce l'interpretazione del carattere \\
+                \hline
+                \texttt{*} & \small $0$ o più ripetizioni dell'elemento precedente \\
+                \hline
+                \texttt{+} & \small $1$ o più ripetizioni dell'elemento precedente \\
+                \hline
+                \texttt{?} & \small 0 o una ripetizione dell'elemento precedente \\
+                \hline
+            \end{tabular}
+            \end{center}
+    \end{frame}
+
+    \begin{frame}{grep: esempi}
+        \small
+        \begin{itemize}
+            \item \texttt{\textbf{grep -F rossi /etc/passwd}}
+        \end{itemize}
     \end{frame}
 
     \begin{frame}{Pipeline}
-        \centering
-        \includegraphics[height=2.5cm,keepaspectratio]{images/futurama.png}
+        \begin{center}
+            \includegraphics[height=2.2cm,keepaspectratio]{images/futurama.png}
+        \end{center}
+        Due o più comandi possono essere messi in cascata collegando l'output
+        del precedente con l'input del successivo. La sintassi è la seguente: 
+        
+        \begin{center}
+            \texttt{\textbf{comando1 | comando2 | ... | comando\textit{n}}}
+        \end{center}
+
+        I comandi vengono mandati in esecuzione contemporaneamente: ciascun processo aspetta che arrivi man mano l’output del precedente.
+
+        \begin{exampleblock}{Esempio}
+            \texttt{ls /usr/bin | more }
+        \end{exampleblock}
     \end{frame}
 
     \begin{frame}{wc}
+        \begin{block}{wc}
+            Sintassi: \texttt{\textbf{wc [-c] [-w] [-l] [pathname...]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-c,-w,-l}}: conteggia, rispettivamente, i caratteri/le parole (separate da spazi)/le righe
+                \item \texttt{\textbf{pathname}}: file da analizzare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{wc}} effettua l’analisi del suo standard input (se non vengono
+            passati parametri) o dei file passati conteggiando il numero di byte, parole
+            e/o righe. Se non si specifica una opzione particolare vengono riportati
+            tutti e tre i conteggi.
+        \end{block}
     \end{frame}
 
     \begin{frame}{sort}
+        \begin{block}{sort}
+            Sintassi: \texttt{\textbf{sort [-n] [-r] [-o file] [-t s]}} \\
+            \texttt{\textbf{[-k s1[,s2]] [pathname]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-n}}: considera numerica la chiave di ordinamento
+                \item \texttt{\textbf{-r}}: ordina in modo non crescente
+                \item \texttt{\textbf{-o file}}: invia l'output su un file
+                \item \texttt{\textbf{-t s}}: usa \textbf{s} come separatore
+                \item \texttt{\textbf{-k s1,s2}}: usa i campi da posizione \texttt{\textbf{s1}} a \texttt{\textbf{s2}} per l'ordinamento
+                \item \texttt{\textbf{pathname}}: file da ordinare
+            \end{itemize}
+
+            Il comando \texttt{\textbf{sort}} ordina trattando ogni linea del suo input come una
+            collezione di campi separati da delimitatori.
+            L’ordinamento di default avviene in base al primo campo ed è alfabetico.
+        \end{block}
     \end{frame}
 
     \begin{frame}{Head \& Tail}
+        \begin{block}{head}
+            Sintassi: \texttt{\textbf{head [-c q] [-n q] [pathname...]}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-c q}}: mostra solo i primi \textbf{q} byte dell'input
+                \item \texttt{\textbf{-n q}}: mostra solo le prime \textbf{q} righe dell'input
+            \end{itemize}
+
+            Il comando \texttt{\textbf{head}} mostra di default le 10 righe del suo input.
+        \end{block}
+
+        \begin{block}{tail}
+            Sintassi: \texttt{\textbf{tail [-c q] [-n q] [pathname]}}
+
+            Il comando \texttt{\textbf{tail}} si comporta come \texttt{\textbf{head}} ma
+            a partire dalla fine dell'input.
+        \end{block}
+
+        \begin{exampleblock}{Esempio}
+            \texttt{cat /etc/passwd | tail -n 2 | head -n 1}
+        \end{exampleblock}
     \end{frame}
 
     \begin{frame}{Tar}
+        \begin{center}
+            \includegraphics[height=3cm, keepaspectratio]{images/walle.png}
+        \end{center}
+        Il comando \texttt{\textbf{tar}} ci permette di aggregare file e/o cartelle in un archivio (con estensione .tar).
+        
+        \vspace{0.5cm}
+
+        Opzionalmente, è possibile comprimere gli archivi facendoli
+        passare per un filtro di compressione (\textbf{bzip, bzip2, xz}) in
+        modo esplicito (usando una pipe) oppure in modo implicito (utilizzando le opzioni \textbf{-z},\textbf{-j} o \textbf{-J}).
+    \end{frame}
+
+    \begin{frame}{Tar: sintassi}
+        \begin{block}{tar}
+            \small
+            Sintassi: \texttt{\textbf{tar [-c|-x|-t] [-z|-j|-J] [-v] [-f archive] [pathname]}}
+            
+            \begin{itemize}
+                \item \texttt{\textbf{-c}}: crea un archivio
+                \item \texttt{\textbf{-x}}: estrae un archivio
+                \item \texttt{\textbf{-t}}: elenca il contenuto di un archivio
+                \item \texttt{\textbf{-v}}: mostra il progresso (modalità \textbf{verbose})
+                \item \texttt{\textbf{-z/-j/-J}}: comprime l'archivio con \textbf{gzip}/\textbf{bzip2}/\textbf{xz}
+                \item \texttt{\textbf{-f archive}}: specifica l'archivio
+                \item \texttt{\textbf{pathname}}: file e/o directory da comprimere
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Tar: esempi}
+        \scriptsize
+        \begin{exampleblock}{}
+            \texttt{\$ tar -c -v -f prova.tar *.tex *.pdf images/} \\
+            \texttt{
+            slides.tex \\
+                slides.pdf \\
+                images/ \\
+                images/penguin.pdf \\
+                images/penguin2.pdf \\
+                ...
+            }
+
+            \vspace{0.25cm}
+
+            \texttt{\$ tar x -f prova.tar}
+
+            \texttt{\$ tar cjf prova2.tar.bz2 images/ *.pdf}
+            
+            \vspace{0.25cm}
+
+            \texttt{\$ bzcat prova2.tar.bz2 | tar tv}
+
+            \texttt{drwxr-xr-x davide/davide     0 2023-06-04 10:07 images/ \\
+            -rw-r-{}-r-{}- davide/davide  2336 2023-03-28 17:42 images/penguin.pdf \\
+            -rw-r-{}-r-{}- davide/davide  1886 2023-03-28 17:44 images/penguin2.pdf
+            }
+
+            \vspace{0.25cm}
+
+            \texttt{\$ tar c images/ *.pdf | gzip > prova3.tar.gz}
+        \end{exampleblock}
     \end{frame}
 
     \begin{frame}{Alias}
