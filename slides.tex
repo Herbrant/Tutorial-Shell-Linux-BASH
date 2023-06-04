@@ -836,7 +836,10 @@
     \begin{frame}{grep: esempi}
         \small
         \begin{itemize}
-            \item \texttt{\textbf{grep -F rossi /etc/passwd}}
+            \item \texttt{\textbf{grep -F rossi /etc/passwd}} \\ fornisce in output le linee del file che contengono la stringa \textbf{rossi}
+            \item \texttt{\textbf{grep -G -v `[agt]+' relazione.txt}} \\ fornisce in output le linee del file che non contengono scritte composte dai caratteri \textbf{a}, \textbf{g}, \textbf{t}
+            \item \texttt{\textbf{grep -w print *.c}} \\ fornisce in output le linee di tutti i file con estensione \textbf{.c} che contengono la parola \textbf{print}
+            \item \texttt{\textbf{grep -G `[a-c]+z'}} doc.txt \\ fornisce in output le linee del file che contengono una stringa che ha un prefisso di lunghezza non nulla, costituito solo da lettere \textbf{a}, \textbf{b}, \textbf{c} seguito da una \textbf{z}
         \end{itemize}
     \end{frame}
 
@@ -1121,9 +1124,52 @@
     \end{frame}
 
     \begin{frame}{Controllo dei \textit{job}}
+        La shell associa ad ogni comando un \textbf{job}. Ogni job
+        viene identificato univocamente da un numero, detto \textbf{jobnumber}.
+
+        Proprio per questo, quando un comando viene eseguito in modo asincrono, la shell restituisce il seguente output
+        \begin{center}
+            \texttt{[jobnumber] PID}
+        \end{center}
+
+        Per controllare i job è possibile utilizzare i seguenti comandi:
+
+        \begin{itemize}
+            \item \textbf{jobs}: visualizza i job attivi e il loro stato
+            \item \textbf{bg}: manda in background un job
+            \item \textbf{fg}: porta in foreground un job
+            \item \textbf{kill}: invia un segnale ad un job
+        \end{itemize}
     \end{frame}
 
     \section{BASH}
+
+    % \begin{frame}{Quoting}
+    %     Il meccanismo del \textbf{quoting} serve ad eliminare il metasignificato
+    %     ad alcuni caratteri. Questo può essere di tre tipi:
+    %     \begin{itemize}
+    %         \item \textbf{\textbackslash} (\textit{backslash}): elimina il metasignificato del carattere seguente
+    %         \item \textbf{` '} (\textit{single quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno
+    %         \item \textbf{`` ''} (\textit{double quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno ad eccezione di \textbf{\$}, \textbf{`} e \textbf{\textbackslash}.
+    %     \end{itemize}
+
+    %     \begin{exampleblock}{Esempi}
+    %         \scriptsize
+    %         \texttt{\$ echo \$PATH}
+            
+    %         \texttt{/usr/local/bin:/usr/bin:/usr/local/sbin...}
+
+    %         \texttt{\$ echo \textbackslash\$PATH}
+
+    %         \texttt{\$PATH}
+
+    %         \vspace{0.25cm}
+
+    %         \texttt{\$ echo "Il mio nome è \$USER e ho 5\$.}
+
+    %         \texttt{Il mio nome è davide e ho 5\$.}
+    %     \end{exampleblock}
+    % \end{frame}
 
 
     
