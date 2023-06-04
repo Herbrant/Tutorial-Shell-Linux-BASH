@@ -273,7 +273,7 @@
                 \huge \textbf{CTRL+SHIFT+C}
             \column{0.5\textwidth}
                 \centering
-                \huge \textbf{CTRL+SHIFT+S}
+                \huge \textbf{CTRL+SHIFT+V}
         \end{columns}
     \end{frame}
 
@@ -331,7 +331,7 @@
         \begin{exampleblock}{Esempio}
             \$ ls /home/davide/script.sh
             
-            -rw-r-{}-r-{}- 1 davide davide 967 31 mag 23.05 script.sh
+            -rwxr-{}-r-{}- 1 davide davide 967 31 mag 23.05 script.sh
         \end{exampleblock}
     \end{frame}
 
@@ -355,7 +355,7 @@
         \end{itemize}
 
         \begin{exampleblock}{Esempio}
-            -rw-r-{}-r-{}- 1 davide davide 967 31 mag 23.05 script.sh
+            -rwxr-{}-r-{}- 1 davide davide 967 31 mag 23.05 script.sh
         \end{exampleblock}
     \end{frame}
 
@@ -538,6 +538,11 @@
 
                 \large \textbf{standard user}
         \end{columns}
+    \end{frame}
+
+    \begin{frame}{}
+        \centering
+        \includegraphics[height=4.5cm, keepaspectratio]{images/sudo-incident.png}
     \end{frame}
 
     \begin{frame}{Filesystem: chmod}
@@ -774,7 +779,7 @@
 
         \begin{itemize}
             \item \texttt{\textbf{>}}: redireziona l'output su un file
-            \item \texttt{\textbf{>>}}: redireziona l'output su un file in modalità \textbf{append}
+            \item \texttt{\textbf{<{}<}}: redireziona l'output su un file in modalità \textbf{append}
             \item \texttt{\textbf{<}}: prende l'input da un file
             \item \texttt{\textbf{2>}}: redireziona lo standard error su un file
         \end{itemize}
@@ -1041,7 +1046,7 @@
             \end{itemize}
         \end{block}
 
-        \begin{exampleblock}{esempio2}
+        \begin{exampleblock}{Esempio}
             \scriptsize
 
             \texttt{\$ alias ll=`ls -l'}
