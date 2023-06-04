@@ -179,7 +179,7 @@
             \column{0.5\textwidth}
                 \centering
                 \includegraphics[height=2cm, keepaspectratio]{images/alert-file.pdf}
-                
+
                 \texttt{\textbf{/dev/full}}
             \column{0.5\textwidth}
                 \centering
@@ -384,6 +384,7 @@
 
     \begin{frame}{Filesystem: cd/pwd}
         \begin{block}{cd}
+            \small
             Sintassi: \texttt{\textbf{cd [pathname]}}
             
             \begin{itemize}
@@ -395,6 +396,7 @@
         \end{block}
 
         \begin{block}{pwd}
+            \small
             Sintassi: \texttt{\textbf{pwd}}
 
             Il comando ci permette di ottenere la \textit{present working directory}, ovvero il path assoluto
@@ -404,6 +406,7 @@
 
     \begin{frame}{Filesystem: mkdir/rmdir}
         \begin{block}{mkdir}
+            \small
             Sintassi: \texttt{\textbf{mkdir [-p] pathname\dots}}
 
             \begin{itemize}
@@ -415,6 +418,7 @@
         \end{block}
 
         \begin{block}{rmdir}
+            \small
             Sintassi: \texttt{\textbf{rmdir [-p] pathname\dots}}
 
             \begin{itemize}
@@ -431,6 +435,7 @@
         \includegraphics[height=2.5cm, keepaspectratio]{images/spider-man-meme.jpg}
 
         \begin{block}{cp}
+            \small
             Sintassi: \texttt{\textbf{cp [-R] [-i] source... dest}}
 
             \begin{itemize}
@@ -449,6 +454,7 @@
         \includegraphics[height=3cm, keepaspectratio]{images/willy.jpg}
 
         \begin{block}{rm}
+            \small
             Sintassi: \texttt{\textbf{rm [-r] [-i] [-f] pathname...}}
 
             \begin{itemize}
@@ -472,6 +478,7 @@
         \includegraphics[height=3cm, keepaspectratio]{images/spara-porte.png}
 
         \begin{block}{mv}
+            \small
             Sintassi: \texttt{\textbf{mv source... dest}}
 
             \begin{itemize}
@@ -483,8 +490,12 @@
         \end{block}
     \end{frame}
 
+    \begin{frame}{Filesystem: mount}
+    \end{frame}
+
     \begin{frame}{Filesystem: chmod}
         \begin{block}{chmod}
+            \small
             Sintassi: \texttt{\textbf{chmod [-R] mode [pathname...]}}
 
             \begin{itemize}
@@ -497,12 +508,14 @@
         \end{block}
 
         \begin{alertblock}{mode: sintassi numerica}
+            \small
             \texttt{rw-r-{}-{}-{}-{}- $\rightarrow$ 110 100 000 $\rightarrow$ 640}
 
             \texttt{rwxr-xr-x $\rightarrow$ 111 101 101 $\rightarrow$ 755}
         \end{alertblock}
 
         \begin{alertblock}{mode: sintassi simbolica}
+            \small
             \texttt{rw-r-{}-{}-{}-{}- $\leftrightarrow$ u=rw,g=r,o-rwx}
         
             \texttt{rw-rw-rw- $+$ u+x,o-rw $\rightarrow$ rwxrw-{}-{}-{}-}
@@ -522,6 +535,7 @@
         \centering
         \includegraphics[height=3cm, keepaspectratio]{images/bugs-bunny-capitalist.png}
         \begin{block}{chown}
+            \small
             Sintassi: \texttt{\textbf{chown [-R] owner[:group] [pathname...]}}
 
             \begin{itemize}
@@ -560,15 +574,17 @@
 
     \begin{frame}{Filesystem: link}
         \begin{block}{Soft link}
-
+            \small
         \end{block}
 
         \begin{block}{Hard link}
+            \small
         \end{block}
     \end{frame}
 
     \begin{frame}{Filesystem: ln}
         \begin{block}{ln}
+            \small
             Sintassi: \texttt{\textbf{ln [-s] target... [linkpathname]}}
 
             \begin{itemize}
@@ -586,6 +602,7 @@
         \includegraphics[height=3cm, keepaspectratio]{images/scooby.jpg}
 
         \begin{block}{find}
+            \small
             Sintassi: \texttt{\textbf{find [pathname...] [expression]}}
 
             \begin{itemize}
@@ -635,6 +652,7 @@
         \includegraphics[height=3cm, keepaspectratio]{images/george.png}
 
         \begin{block}{echo}
+            \small
             Sintassi \texttt{\textbf{echo [-n] [-e] [stringa...]}}
 
             \begin{itemize}
@@ -654,6 +672,7 @@
         \includegraphics[height=3cm, keepaspectratio]{images/garfield.jpg}
 
         \begin{block}{cat}
+            \small
             Sintassi: \texttt{\textbf{cat [pathname...]}}
 
             \begin{itemize}
@@ -665,6 +684,7 @@
     \end{frame}
 
     \begin{frame}{more \& less}
+        \small
         \begin{block}{more}
             Sintassi: \texttt{\textbf{more [pathname...]}}
 
@@ -748,6 +768,7 @@
 
     \begin{frame}{grep}
         \begin{block}{grep}
+            \small
             Sintassi \texttt{\textbf{grep [-i] [-l] [-v] [-w] [pattern] [filename]}}
 
             \begin{itemize}
@@ -825,6 +846,7 @@
 
     \begin{frame}{wc}
         \begin{block}{wc}
+            \small
             Sintassi: \texttt{\textbf{wc [-c] [-w] [-l] [pathname...]}}
 
             \begin{itemize}
@@ -841,6 +863,7 @@
 
     \begin{frame}{sort}
         \begin{block}{sort}
+            \small
             Sintassi: \texttt{\textbf{sort [-n] [-r] [-o file] [-t s]}} \\
             \texttt{\textbf{[-k s1[,s2]] [pathname]}}
 
@@ -861,6 +884,7 @@
 
     \begin{frame}{Head \& Tail}
         \begin{block}{head}
+            \small
             Sintassi: \texttt{\textbf{head [-c q] [-n q] [pathname...]}}
 
             \begin{itemize}
@@ -872,6 +896,7 @@
         \end{block}
 
         \begin{block}{tail}
+            \small
             Sintassi: \texttt{\textbf{tail [-c q] [-n q] [pathname]}}
 
             Il comando \texttt{\textbf{tail}} si comporta come \texttt{\textbf{head}} ma
@@ -879,6 +904,7 @@
         \end{block}
 
         \begin{exampleblock}{Esempio}
+            \small
             \texttt{cat /etc/passwd | tail -n 2 | head -n 1}
         \end{exampleblock}
     \end{frame}
@@ -948,6 +974,33 @@
     \end{frame}
 
     \begin{frame}{Alias}
+        \begin{block}{alias}
+            \small
+            Sintassi: \texttt{\textbf{alias [name[=value]]}}
+
+            Il comando \texttt{\textbf{alias}} permette di associare a nomi propri sequenze arbitrarie
+            di comandi e opzioni. Inoltre,
+
+            \begin{itemize}
+                \item \texttt{\textbf{alias}} (senza parametri): restituisce la lista degli alias attualmente attivi
+                \item \texttt{\textbf{alias name}}: restituisce l'associazione attuale per \texttt{\textbf{name}}
+                \item \texttt{\textbf{unalias name}}: rimuove l'alias \texttt{\textbf{name}}
+            \end{itemize}
+        \end{block}
+
+        \begin{exampleblock}{esempio2}
+            \scriptsize
+
+            \texttt{\$ alias ll=`ls -l'}
+            
+            \texttt{\$ ll /}
+
+            \texttt{lrwxrwxrwx   1 root root    7 31 gen 21.51 bin -> usr/bin \\
+            drwxr-xr-x   1 root root  180 31 mag 10.56 boot \\
+            drwxr-xr-x  21 root root 4,1K  4 giu 08.04 dev \\
+            ...
+            }
+        \end{exampleblock}
     \end{frame}
 
     \begin{frame}{Modalità di esecuzione}
