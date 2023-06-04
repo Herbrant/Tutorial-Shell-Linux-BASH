@@ -491,6 +491,40 @@
     \end{frame}
 
     \begin{frame}{Filesystem: mount}
+        \begin{block}{mount}
+            \small
+            Sintassi: \texttt{\textbf{mount [-t fstype] [-o options] device mountpoint}}
+
+            \begin{itemize}
+                \item \texttt{\textbf{-t fstype}}: permette di specificare il tipo del filesystem da montare (ext2, ext3, ext4, btrfs...)
+                \item \texttt{\textbf{-o options}}: permette di specificare ulteriori opzioni per il mount
+                \item \texttt{\textbf{device}}: il dispositivo da montare (di solito una partizione del tipo \texttt{/dev/sdaX})
+                \item \texttt{\textbf{mountpoint}}: directory in cui montare filesystem
+            \end{itemize}
+
+            Il comando \texttt{\textbf{mount}} permette di montare un filesystem all'interno
+            dell'albero principale.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Utenti nei sistemi Unix}
+        \begin{columns}[t, onlytextwidth]
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=2.5cm, keepaspectratio]{images/root.pdf}
+
+                \large \textbf{root}
+            \column{0.33\textwidth}
+                \centering
+                \Huge $\longleftarrow$
+
+                \large sudo
+            \column{0.33\textwidth}
+                \centering
+                \includegraphics[height=2.5cm, keepaspectratio]{images/user2.pdf}
+
+                \large \textbf{standard user}
+        \end{columns}
     \end{frame}
 
     \begin{frame}{Filesystem: chmod}
@@ -550,26 +584,6 @@
     \begin{frame}{}
         \centering
         \includegraphics[height=8cm, keepaspectratio]{images/chown-chmod.png}
-    \end{frame}
-
-    \begin{frame}{Utenti nei sistemi Unix}
-        \begin{columns}[t, onlytextwidth]
-            \column{0.33\textwidth}
-                \centering
-                \includegraphics[height=2.5cm, keepaspectratio]{images/root.pdf}
-
-                \large \textbf{root}
-            \column{0.33\textwidth}
-                \centering
-                \Huge $\longleftarrow$
-
-                \large sudo
-            \column{0.33\textwidth}
-                \centering
-                \includegraphics[height=2.5cm, keepaspectratio]{images/user2.pdf}
-
-                \large \textbf{standard user}
-        \end{columns}
     \end{frame}
 
     \begin{frame}{Filesystem: link}
@@ -1004,6 +1018,109 @@
     \end{frame}
 
     \begin{frame}{Modalità di esecuzione}
+        Esistono varie modalità di esecuzione dei comandi sulla shell.
+        
+        La più semplice consiste nell'invocazione di un singolo comando.
+
+        Ogni comando restituisce un \textbf{exit status} che
+        rappresenta l'esito dell'esecuzione del comando stesso.
+
+        \vspace{0.5cm}
+
+        L'\textbf{exit status} è un intero nel range $[0,255]$.
+        
+        Questo è posto a:
+        
+        \hspace{1cm} $\textbf{0}$: se l'esecuzione è riuscita con successivo
+
+        \hspace{1cm} $\textbf{> 0}$: se l'esecuzione è fallita
+
+        \vspace{0.5cm}
+
+        I valori nel range $[1,255]$ sono utili per specificare all'utente il tipo di errore
+        riportato durante l'esecuzione.
+    \end{frame}
+
+    \begin{frame}{\textit{Simple Command Execution}}
+        \centering
+        \includegraphics[height=7cm,keepaspectratio]{images/sce.pdf}
+    \end{frame}
+
+    \begin{frame}{\textit{Pipeline}}
+        \centering
+        \includegraphics[height=4.4cm,keepaspectratio]{images/pipeline.pdf}
+    \end{frame}
+
+    \begin{frame}{\textit{List of command}}
+        La lista di comandi permette di raggruppare una sequenza di comandi.
+        La sintassi per l'invocazione è la seguente
+        \begin{center}
+            \texttt{\textbf{comando1 [; comando2...]}}
+        \end{center}
+
+        L'\textbf{exit status} della sequenza è uguale a quello dell'ultimo comando
+        presente nella lista.
+
+        \vspace{1cm}
+
+        \begin{exampleblock}{Esempio}
+            \footnotesize
+            \texttt{\$ echo -n "Via "; echo -n "del "; echo "campo"}
+            
+            \texttt{Via del campo}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{\textit{List of command}}
+        \centering
+        \includegraphics[height=7.5cm, keepaspectratio]{images/loc.pdf}
+    \end{frame}
+
+    \begin{frame}{\textit{List of command}}
+        Nelle sequenze di comandi è possibile utilizzare gli operatori
+        condizionali \textbf{\&\&} e \textbf{||}. La semantica è la seguente:
+        \begin{itemize}
+            \item \texttt{\textbf{c1 \&\& c2}}: \texttt{c2} viene eseguito se e solo se l'exit status di \texttt{c1} è 0.
+            \item \texttt{\textbf{c1 || c2}}: \texttt{c2} viene eseguito se e solo se l'exit status di \texttt{c1} è diverso da 0.
+        \end{itemize}
+
+        L'exit status di una lista condizionata è uguale all'exit status dell'ultimo comando eseguito.
+
+        \begin{exampleblock}{Esempio}
+            \footnotesize
+
+            \texttt{\$ cat fileinesistente \&\&  echo fatto}
+
+            \texttt{cat: fileinesistente: File o directory non esistente}
+
+            \vspace{0.5cm}
+            
+            \texttt{\$ cat fileinesistente || echo errore}
+
+            \texttt{cat: fileinesistente: File o directory non esistente}
+
+            \texttt{errore}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{\textit{Asynchronous execution}}
+        Un comando può essere eseguito in \textbf{background} usando la sintassi
+        \begin{center}
+            \texttt{\textbf{comando \&}}
+        \end{center}
+
+        \vspace{0.5cm}
+
+        Inoltre, un processo in \textbf{foreground} può essere mandato
+        in background interattivamente attraverso la combinazione di tasti
+        \textbf{CTRL + Z}. In questo caso però il processo sospeso.
+
+        \vspace{0.5cm}
+
+        Questo può essere riportato in foreground utilizzando il comando \texttt{\textbf{fg}}.
+    \end{frame}
+
+    \begin{frame}{Controllo dei \textit{job}}
     \end{frame}
 
     \section{BASH}
