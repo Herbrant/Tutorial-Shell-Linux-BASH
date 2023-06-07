@@ -871,7 +871,7 @@
                 \texttt{?} & \small 0 o una ripetizione dell'elemento precedente \\
                 \hline
             \end{tabular}
-            \end{center}
+        \end{center}
     \end{frame}
 
     \begin{frame}{grep: esempi}
@@ -1185,33 +1185,319 @@
 
     \section{BASH}
 
-    % \begin{frame}{Quoting}
-    %     Il meccanismo del \textbf{quoting} serve ad eliminare il metasignificato
-    %     ad alcuni caratteri. Questo può essere di tre tipi:
-    %     \begin{itemize}
-    %         \item \textbf{\textbackslash} (\textit{backslash}): elimina il metasignificato del carattere seguente
-    %         \item \textbf{` '} (\textit{single quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno
-    %         \item \textbf{`` ''} (\textit{double quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno ad eccezione di \textbf{\$}, \textbf{`} e \textbf{\textbackslash}.
-    %     \end{itemize}
+    \begin{frame}{BASH: introduzione}
+        \begin{center}
+            \includegraphics[height=2cm, keepaspectratio]{images/bash.pdf}
+        \end{center}
+        \textbf{BASH} rappresenta l'evoluzione della Bourne shell (\textit{sh}).
 
-    %     \begin{exampleblock}{Esempi}
-    %         \scriptsize
-    %         \texttt{\$ echo \$PATH}
+        \vspace{0.5cm}
+
+        BASH è sia un interprete di comandi che un linguaggio di scripting, infatti è
+        possibile utilizzare le utility che abbiamo visto fino ad ora con i costrutti tipici
+        della programmazione.
+
+        \vspace{0.5cm}
+
+        BASH è la shell interattiva di default sulla maggior partire
+        delle distribuzioni GNU/Linux e su Mac.
+    \end{frame}
+
+    \begin{frame}[fragile]{Script}
+        Uno \textbf{script} è un insieme strutturato di comandi shell con strutture di controllo
+        tipiche della programmazione imperativa.
+
+
+
+        \begin{exampleblock}{Esempio di script}
+            \inputminted[fontsize=\small]{bash}{script/first-example.sh}
+        \end{exampleblock}
+
+        \begin{alertblock}{Esecuzione}
+            \small
+            Uno script può essere eseguito con la sintassi
+
+            \begin{center}
+                \texttt{\textbf{bash nome-script.sh}}
+            \end{center}
+
+            Alternativamente, se questo possiede il permesso di esecuzione può essere eseguito direttamente
+            con \texttt{\textbf{./nome-script.sh}}. In questo caso sarà il sistema operativo
+            a passare il file all'interprete correto, in base all'intestazione presente nel file.
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}{Variabili}
+        \begin{center}
+            \includegraphics[height=2.5cm, keepaspectratio]{images/variables.pdf}
+        \end{center}
+
+        All'interno di uno script è possibile dichiarare delle variabili con la seguente sintassi
+
+        \begin{center}
+            \texttt{\textbf{var\_name=value}}
+        \end{center}
+
+        È possibile poi accedere al valore di una variabile utilizzando il metacarattere \textbf{\$}
+        seguito dal nome della variabile:
+
+        \begin{center}
+            \texttt{\textbf{\$var\_name}}
+        \end{center}
+
+        Di default le variabili dichiarate hanno \textit{scope globale}.
+    \end{frame}
+
+    \begin{frame}{Variabili built-in}
+        \begin{itemize}
+            \item \textbf{\$\#}: il numero di argomenti passati da command-line \\ \vspace{0.5cm}
+            \item \textbf{\$i}: \textit{i}-esimo argomento passato da command-line \\ \vspace{0.5cm}
+            \item \textbf{\$*}: lista di tutti gli argomenti passati da command-line (separati da \$IFS) \\ \vspace{0.5cm}
+            \item \textbf{\$@}: lista di tutti gli argomenti racchiusi da doppi apici \\ \vspace{0.5cm}
+            \item \textbf{\$?}: exit status dell'ultimo comando eseguito \\ \vspace{0.5cm}
+            \item \textbf{\$!}: process id dell'ultimo comando eseguito in background
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Command substitution}
+        È possibile assegnare l'output di un comando con il
+        comando stesso con la seguente sintassi
+
+        \begin{center}
+            \texttt{\textbf{\$(comando)}}
+        \end{center}
+
+        Risulta molto utile per inizializzare le variabili.
+
+        \begin{exampleblock}{}
+            \small
+
+            \texttt{\$ ls | wc -w}
+
+            \texttt{15}
+
+            \vspace{0.5cm}
+
+            \texttt{\$ PAROLE=\$(ls | wc -w)}
+
+            \vspace{0.5cm}
+
+            \texttt{\$ echo parole conteggiate: \$PAROLE}
+
+            \texttt{parole conteggiate: 15}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Quoting}
+        Il meccanismo del \textbf{quoting} serve ad eliminare il metasignificato
+        ad alcuni caratteri. Questo può essere di tre tipi:
+        \begin{itemize}
+            \item \textbf{\textbackslash} (\textit{backslash}): elimina il metasignificato del carattere seguente
+            \item \textbf{` '} (\textit{single quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno
+            \item \textbf{`` ''} (\textit{double quote}): elimina il metasignificato da tutti i caratteri contenuti al suo interno ad eccezione di \textbf{\$}, \textbf{`} e \textbf{\textbackslash}.
+        \end{itemize}
+
+        \begin{exampleblock}{Esempi}
+            \scriptsize
+            \texttt{\$ echo \$PATH}
             
-    %         \texttt{/usr/local/bin:/usr/bin:/usr/local/sbin...}
+            \texttt{/usr/local/bin:/usr/bin:/usr/local/sbin...}
 
-    %         \texttt{\$ echo \textbackslash\$PATH}
+            \texttt{\$ echo \textbackslash\$PATH}
 
-    %         \texttt{\$PATH}
+            \texttt{\$PATH}
 
-    %         \vspace{0.25cm}
+            \vspace{0.25cm}
 
-    %         \texttt{\$ echo "Il mio nome è \$USER e ho 5\$.}
+            \texttt{\$ echo "Il mio nome è \$USER e ho 5\$.}
 
-    %         \texttt{Il mio nome è davide e ho 5\$.}
-    %     \end{exampleblock}
-    % \end{frame}
+            \texttt{Il mio nome è davide e ho 5\$.}
+        \end{exampleblock}
+    \end{frame}
 
+    \begin{frame}{Espressioni aritmetiche}
+        \begin{center}
+            \includegraphics[height=2cm, keepaspectratio]{images/arithmetic.pdf}
+        \end{center}
+        La valutazioni di espressioni aritmetiche con numeri interi si può
+        ottenere tramite la seguente sintassi
 
+        \begin{center}
+            \texttt{\textbf{((a=3+4/2))}}
+        \end{center}
+
+        La variabile \textit{a} conterrà il risultato dell'espressione.
+
+        \begin{alertblock}{Nota}
+            BASH non permette l'esecuzione di operazioni in virgola mobile, nel caso
+            in cui fosse necessario è possibile invocare applicativi come \textit{bc}, \textit{calc} o \textit{python}.
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}{Condizioni}
+        \begin{center}
+            \includegraphics[height=2cm]{images/if.pdf}
+        \end{center}
+
+        In BASH è possibile esprimere condizioni attraverso le parentesi
+        quadre:
+        \begin{center}
+            \texttt{\textbf{[ condizione ]}}
+        \end{center}
+
+        Tali condizioni possono essere concatenate usando \texttt{\textbf{\&\&}} e \texttt{\textbf{||}}:
+
+        \begin{center}
+            \texttt{\textbf{[ cond1 ] \&\& [ cond2 ]}}
+        \end{center}
+
+        \begin{alertblock}{Nota}
+            \small
+            In realtà, la sintassi \texttt{\textbf{[ condizione ]}} rappresenta
+            una forma compatta per l'esecuzione del comando \textit{test} il cui \textit{exit status} è
+            posto a $0$ se l'espressione è vera, $1$ altrimenti.
+        \end{alertblock}
+        \end{frame}
+
+    \begin{frame}{Condizioni: operatori binari}
+        \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+                \hline
+                \textbf{Op. aritmetici} & \textbf{Op. stringhe} & \textbf{Significato} \\
+                \hline
+                \texttt{-eq} & = & uguaglianza \\
+                \hline
+                \texttt{-neq} & != & disuguaglianza \\
+                \hline
+                \texttt{-lt} & \textbackslash< & minore \\
+                \hline
+                \texttt{-le} & & minore o uguale \\
+                \hline
+                \texttt{-gt} & \textbackslash> & maggiore \\
+                \hline
+                \texttt{-ge} & & maggiore o uguale \\
+                \hline
+                & \texttt{-z} & stringa vuota \\
+                \hline
+                & \texttt{-n} & stringa non vuota \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}{Condizioni: operatori su file}
+        \begin{center}
+            \begin{tabular}{ |c|c| } 
+                \hline
+                \textbf{Operatore} & \textbf{Significato} \\
+                \hline
+                \texttt{-e} & Il file esiste \\
+                \hline
+                \texttt{-f} & Il file esiste ed è \textit{regolare} \\
+                \hline
+                \texttt{-d} & Il file è una \textit{directory} \\
+                \hline
+                \texttt{-h/-L} & Il file è un \textit{soft link} \\
+                \hline
+                \texttt{-O} & Il file è di tua proprietà \\
+                \hline
+                \texttt{-s} & Il file è non vuoto \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        \begin{alertblock}{Operatore NOT}
+            In generale è possibile negare una condizione anteponendo l'operatore \texttt{\textbf{!}}, ad esempio:
+
+            \begin{center}
+                \texttt{! -e file}
+            \end{center}
+
+            restituisce \textit{true} se il file non esiste, \textit{false} altrimenti.
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}[fragile]{Costrutto \textit{if}}
+        \inputminted[fontsize=\small]{bash}{script/if-example.sh}
+    \end{frame}
+
+    \begin{frame}[fragile]{Costrutto \textit{if} (versione compatta)}
+        \inputminted[fontsize=\small]{bash}{script/if-example-short.sh}
+    \end{frame}
+
+    \begin{frame}{Costrutto \textit{while}}
+        \inputminted[fontsize=\small]{bash}{script/while-example.sh}
+    \end{frame}
+
+    \begin{frame}{Costrutto \textit{for}}
+        \inputminted[fontsize=\scriptsize]{bash}{script/for-example.sh}
+    \end{frame}
+
+    \begin{frame}{Costrutto: \textit{switch}}
+        \inputminted[fontsize=\scriptsize]{bash}{script/switch-example.sh}
+    \end{frame}
+
+    \begin{frame}[fragile]{Array}
+        \inputminted[fontsize=\small]{bash}{script/array-example.sh}
+    \end{frame}
+
+    \begin{frame}{Hello Function}
+        \inputminted[fontsize=\small]{bash}{script/hello-function.sh}
+    \end{frame}
+
+    \begin{frame}{Subshell}
+        Una \textbf{subshell} è un processo figlio lanciato dalla \textit{shell} (o da uno script).
+
+        Le subshell permettono di parallelizzare gli script, esegundo sotto-task simultaneamente.
+        
+        \begin{exampleblock}{subshell-test.sh}
+            \inputminted[fontsize=\small]{bash}{script/subshell-test.sh}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Restricted shell}
+        Eseguire uno script o una porzione dello script in \textit{restricted mode}
+        permette di limitare i privilegi dello script al fine
+        di minimizzare i possibili danni dovuti all'esecuzione dello stesso.
+
+        \vspace{0.5cm}
+
+        In particolare, uno script eseguito in questa modalità \textbf{non} può:
+
+        \begin{itemize}
+            \item Usare il comando \textit{cd} per cambiare la working directory
+            \item Modificare il valore delle variabili d'ambiente (\textit{\$PATH}, \textit{\$SHELL}, \textit{\$ENV}, ...)
+            \item Effettuare redirezione dell'output
+            \item Invocare \textit{exec}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[fragile]{Restricted shell: esempio}
+        \inputminted[fontsize=\scriptsize]{bash}{script/restricted-mode.sh}
+    \end{frame}
+
+    \begin{frame}[focus]
+        \centering
+        \includegraphics[height=4cm, keepaspectratio]{images/pasta.pdf} \\
+        Get your hands dirty!
+    \end{frame}
+
+    \begin{frame}{Esercizio 1}
+        Scrivere uno script che prende in input $n$ file di testo (\textit{pathname}) e crea un file
+        di testo di nome \textit{merged.txt} che contiene l'unione di tutti i file di testo.
+    \end{frame}
+
+    \begin{frame}[fragile]{Esercizio 2}
+        Scrivere uno script che, presi in input il pathname
+        di una directory contenente file di testo e una stringa \textit{s}, restituisca
+        in output il numero di righe contenenti la parola \textit{s} all'interno dei file di testo.
+
+        \begin{alertblock}{Tip}
+            Un file di testo può essere letto riga per riga utilizzando la seguente sintassi
+            \begin{center}
+                \inputminted[fontsize=\scriptsize]{bash}{script/readfile-snippet.sh}
+            \end{center}
+        \end{alertblock}
+    \end{frame}
     
 \end{document}
